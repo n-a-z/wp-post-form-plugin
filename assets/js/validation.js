@@ -9,8 +9,11 @@ function isEmpty(str) {
 function validateForm() {
   let title = document.forms['post_form']['post_form_title'].value;
   let content = document.forms['post_form']['post_form_content'].value;
+
   if (isEmpty(title) && isEmpty(content)) {
-    alert('Post Title and Content must be filled out');
+    alert(
+      'Post Title and Content must be filled out. HTML tags are not allowed inside Post Content.'
+    );
     return false;
   } else {
     if (isEmpty(title)) {
@@ -18,7 +21,10 @@ function validateForm() {
       return false;
     }
     if (isEmpty(content)) {
-      alert('Post Content must be filled out');
+      alert('Post Content must be filled out. HTML tags are not allowed.');
+      return false;
+    } else if (content.match(/<[^>]*>?/gm)) {
+      alert('HTML tags are not allowed inside Post Content.');
       return false;
     }
   }
