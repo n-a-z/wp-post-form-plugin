@@ -51,8 +51,8 @@ function create_post()
 {
     if (isset($_POST['post_form_submit'])) {
         $my_post = array(
-            'post_title'    => wp_strip_all_tags($_POST['post_form_title']),
-            'post_content'  => $_POST['post_form_content'],
+            'post_title'    => sanitize_text_field($_POST['post_form_title']),
+            'post_content'  => wp_strip_all_tags($_POST['post_form_content']),
             'post_status'   => 'draft',
             'post_author'   => 1,
             'post_category' => array(8, 39)

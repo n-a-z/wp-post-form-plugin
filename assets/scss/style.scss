@@ -1,15 +1,18 @@
+//Globals
+$breakpoint-mobile-max: 767px;
+
 .post-form {
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-between;
 
-  @media (max-width: 767px) {
+  @media (max-width: $breakpoint-mobile-max) {
   }
 
   &__input-container {
     width: 45%;
-    margin-left: auto;
-    margin-right: auto;
-    @media (max-width: 767px) {
+
+    @media (max-width: $breakpoint-mobile-max) {
       width: 100%;
     }
   }
@@ -24,7 +27,8 @@
     margin-left: auto;
     margin-right: auto;
     margin-top: 25px;
-    @media (max-width: 767px) {
+    
+    @media (max-width: $breakpoint-mobile-max) {
       margin-top: 10px;
     }
   }
