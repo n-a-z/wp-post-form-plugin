@@ -1,0 +1,1 @@
+A lightweight WordPress form plugin to add new posts. To use add the shortcode [post_form] in the desired area.

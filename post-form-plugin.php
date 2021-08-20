@@ -2,23 +2,34 @@
 /*
 Plugin Name: Post Form Plugin
 Plugin URI: https://github.com/n-a-z/wp-post-form-plugin
-Description: Form plugin to add WordPress posts
+Description: A lightweight WordPress form plugin to add new posts. To use add the shortcode [post_form] in the desired area.
 Version: 1.0
 Author: Piotr Stepien
 Author URI: https://github.com/n-a-z
 */
 
+function load_plugin_css()
+{
+    $plugin_url = plugin_dir_url(__FILE__);
+
+    wp_enqueue_style('style', $plugin_url . 'assets/css/style.css');
+}
+add_action('wp_enqueue_scripts', 'load_plugin_css');
+
 function html_form_code()
 {
-    echo '<form action="' . esc_url($_SERVER['REQUEST_URI']) . '" method="post">';
-    echo 'Post Title (required) <br />';
-    echo '<input type="text" name="post_form_title" pattern="[a-zA-Z0-9 ]+" value="' . (isset($_POST["post_form_title"]) ? esc_attr($_POST["post_form_title"]) : '') . '" size="40" />';
-    echo '</p>';
-    echo '<p>';
-    echo 'Post Entry (required) <br />';
-    echo '<textarea rows="10" cols="35" name="post_form_content">' . (isset($_POST["post_form_content"]) ? esc_attr($_POST["post_form_content"]) : '') . '</textarea>';
-    echo '</p>';
-    echo '<p><input type="submit" name="post_form_submit" value="Create Post"/></p>';
+    echo '<form class="post-form" action="' . esc_url($_SERVER['REQUEST_URI']) . '" method="post">';
+    echo '<div class="post-form__input-container">';
+    echo '<p class="post-form__input-title">Post Title (required)</p>';
+    echo '<input class="post-form__input" type="text" name="post_form_title" pattern="[a-zA-Z0-9 ]+" value="' . (isset($_POST["post_form_title"]) ? esc_attr($_POST["post_form_title"]) : '') . '" size="40" />';
+    echo '</div>';
+    echo '<div class="post-form__input-container">';
+    echo '<p class="post-form__input-title">Post Entry (required)</p>';
+    echo '<textarea class="post-form__input"  rows="6" cols="35" name="post_form_content">' . (isset($_POST["post_form_content"]) ? esc_attr($_POST["post_form_content"]) : '') . '</textarea>';
+    echo '</div>';
+    echo '<div class="post-form__submit-container">';
+    echo '<input class="post-form__submit" type="submit" name="post_form_submit" value="Create Post" /> ';
+    echo '</div>';
     echo '</form>';
 }
 
@@ -47,5 +58,3 @@ function form_shortcode()
 }
 
 add_shortcode('post_form', 'form_shortcode');
-
-?>
