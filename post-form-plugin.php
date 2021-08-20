@@ -16,9 +16,17 @@ function load_plugin_css()
 }
 add_action('wp_enqueue_scripts', 'load_plugin_css');
 
+function load_plugin_js()
+{
+    $plugin_url = plugin_dir_url(__FILE__);
+
+    wp_enqueue_script('validation', $plugin_url . 'assets/js/validation.js');
+}
+add_action('wp_enqueue_scripts', 'load_plugin_js');
+
 function html_form_code()
 {
-    echo '<form class="post-form" action="' . esc_url($_SERVER['REQUEST_URI']) . '" method="post">';
+    echo '<form name="post_form" class="post-form" action="' . esc_url($_SERVER['REQUEST_URI']) . '" onsubmit="return validateForm()" method="post">';
     echo '<div class="post-form__input-container">';
     echo '<p class="post-form__input-title">Post Title (required)</p>';
     echo '<input class="post-form__input" type="text" name="post_form_title" pattern="[a-zA-Z0-9 ]+" value="' . (isset($_POST["post_form_title"]) ? esc_attr($_POST["post_form_title"]) : '') . '" size="40" />';
