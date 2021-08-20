@@ -33,4 +33,8 @@
 .post-form__submit {
   border-radius: 25px !important;
 }
+
+.post-form-success {
+  text-align: center;
+}
 /*# sourceMappingURL=style.css.map */

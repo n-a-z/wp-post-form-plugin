@@ -26,19 +26,25 @@ add_action('wp_enqueue_scripts', 'load_plugin_js');
 
 function html_form_code()
 {
-    echo '<form name="post_form" class="post-form" action="' . esc_url($_SERVER['REQUEST_URI']) . '" onsubmit="return validateForm()" method="post">';
-    echo '<div class="post-form__input-container">';
-    echo '<p class="post-form__input-title">Post Title (required)</p>';
-    echo '<input class="post-form__input" type="text" name="post_form_title" pattern="[a-zA-Z0-9 ]+" value="' . (isset($_POST["post_form_title"]) ? esc_attr($_POST["post_form_title"]) : '') . '" size="40" />';
-    echo '</div>';
-    echo '<div class="post-form__input-container">';
-    echo '<p class="post-form__input-title">Post Entry (required)</p>';
-    echo '<textarea class="post-form__input"  rows="6" cols="35" name="post_form_content">' . (isset($_POST["post_form_content"]) ? esc_attr($_POST["post_form_content"]) : '') . '</textarea>';
-    echo '</div>';
-    echo '<div class="post-form__submit-container">';
-    echo '<input class="post-form__submit" type="submit" name="post_form_submit" value="Create Post" /> ';
-    echo '</div>';
-    echo '</form>';
+    if (isset($_POST["post_form_title"]) && isset($_POST["post_form_content"])) {
+        echo '<div class="post-form-success">';
+        echo '<p class="post-form-success__content">Your post <strong>' . $_POST["post_form_title"] . '</strong> has been added!</p>';
+        echo '</div';
+    } else {
+        echo '<form name="post_form" class="post-form" action="' . esc_url($_SERVER['REQUEST_URI']) . '" onsubmit="return validateForm()" method="post">';
+        echo '<div class="post-form__input-container">';
+        echo '<p class="post-form__input-title">Post Title (required)</p>';
+        echo '<input class="post-form__input" type="text" name="post_form_title" pattern="[a-zA-Z0-9 ]+" value="' . (isset($_POST["post_form_title"]) ? esc_attr($_POST["post_form_title"]) : '') . '" size="40" />';
+        echo '</div>';
+        echo '<div class="post-form__input-container">';
+        echo '<p class="post-form__input-title">Post Entry (required)</p>';
+        echo '<textarea class="post-form__input"  rows="6" cols="35" name="post_form_content">' . (isset($_POST["post_form_content"]) ? esc_attr($_POST["post_form_content"]) : '') . '</textarea>';
+        echo '</div>';
+        echo '<div class="post-form__submit-container">';
+        echo '<input class="post-form__submit" type="submit" name="post_form_submit" value="Create Post" /> ';
+        echo '</div>';
+        echo '</form>';
+    }
 }
 
 function create_post()
