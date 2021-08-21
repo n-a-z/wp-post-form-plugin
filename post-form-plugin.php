@@ -28,7 +28,7 @@ function html_form_code()
 {
     if (isset($_POST["post_form_title"]) && isset($_POST["post_form_content"])) {
         echo '<div class="post-form-success">';
-        echo '<p class="post-form-success__content">Your post <strong>' . $_POST["post_form_title"] . '</strong> has been created!</p>';
+        echo '<p class="post-form-success__content">Your post <strong>' . sanitize_text_field($_POST["post_form_title"]) . '</strong> has been created!</p>';
         echo '</div';
     } else {
         echo '<form name="post_form" class="post-form" action="' . esc_url($_SERVER['REQUEST_URI']) . '" onsubmit="return validateForm()" method="post">';
